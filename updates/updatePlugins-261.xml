@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugins>
-  <plugin id='com.demonwav.minecraft-dev' url='https://github.com/eigenraven/MinecraftDev/releases/download/RFG-1.8.11-2025.3/Minecraft.Development-2025.3-1.8.11-rfg.zip' version='2025.3-1.8.11-rfg'>
-    <idea-version since-build='253.17525.95' until-build='253.*' />
+  <plugin id='com.demonwav.minecraft-dev' url='https://github.com/Lyfts/MinecraftDev/releases/download/RFG-1.8.16-2026.1/Minecraft.Development-2026.1-1.8.16-rfg.zip' version='2026.1-1.8.16-rfg'>
+    <idea-version since-build='261.22158.277' until-build='261.*' />
     <name>Minecraft Development (RFG-Enabled)</name>
     <description><![CDATA[
       RetroFuturaGradle-enabled. Provides first-class support for every major Java Minecraft modding or plugin development platform, including:
