@@ -1,7 +1,24 @@
-<p align="center"><a href="https://mcdev.io/"><img src="https://mcdev.io/assets/icon.svg" height="120" alt="logo"/></a></p>
+1.7-1.12 support fork of Minecraft Development for IntelliJ
+==================================
+
+Fork-specific features
+----------------------
+
+- Release mouse capture on debug breakpoints for LWJGL2 and Lwjgl3ify projects
+- Proper detection of old ForgeGradle and RetroFuturaGradle minecraft project types, including mapping paths
+- Allows the mixin plugin to work correctly on 1.7 and 1.12 projects, potentially more versions (untested)
+
+RFG-Enabled Fork Installation
+------------
+
+1. Go into the plugins menu in IntelliJ (Settings -> Plugins)
+1. Click the gear icon on the top, and click "Manage Plugin Repositories"
+1. Add a raw GitHub link to the update file in the [updates directory](https://github.com/eigenraven/MinecraftDev/tree/rfg/updates), corresponding to the version of IntelliJ you have. For example, if you have 2024.1, use https://raw.githubusercontent.com/eigenraven/MinecraftDev/rfg/updates/updatePlugins-241.xml
+1. MinecraftDev should now show an update if you have the official version installed, which corresponds to Earth's edition of MinecraftDev. If you didn't have the official version installed, installing MinecraftDev will also install the RFG edition.
+
 
 Minecraft Development for IntelliJ
-==================================
+----------------------------------
 
 <table>
     <tr>
@@ -12,39 +29,34 @@ Minecraft Development for IntelliJ
         <td colspan="2"><a href="https://ci.mcdev.io/viewType.html?buildTypeId=MinecraftDev_Build"><img src="https://ci.mcdev.io/app/rest/builds/buildType:(id:MinecraftDev_Build)/statusIcon.svg" alt="Teamcity Build Status" /></a></td>
     </tr>
     <tr>
+        <td align="left">2024.3</td>
+        <td align="left"><a href="https://ci.mcdev.io/viewType.html?buildTypeId=MinecraftDev_Nightly_20243"><img src="https://ci.mcdev.io/app/rest/builds/buildType:(id:MinecraftDev_Nightly_20243)/statusIcon.svg" alt="2024.3 Nightly Status" /></a></td>
+    </tr>
+    <tr>
+        <td align="left">2025.1</td>
+        <td align="left"><a href="https://ci.mcdev.io/viewType.html?buildTypeId=MinecraftDev_Nightly_20251"><img src="https://ci.mcdev.io/app/rest/builds/buildType:(id:MinecraftDev_Nightly_20251)/statusIcon.svg" alt="2025.1 Nightly Status" /></a></td>
+    </tr>
+    <tr>
         <td align="left">2025.2</td>
         <td align="left"><a href="https://ci.mcdev.io/viewType.html?buildTypeId=MinecraftDev_Nightly_20252"><img src="https://ci.mcdev.io/app/rest/builds/buildType:(id:MinecraftDev_Nightly_20252)/statusIcon.svg" alt="2025.2 Nightly Status" /></a></td>
     </tr>
     <tr>
-        <td align="left">2025.3</td>
-        <td align="left"><a href="https://ci.mcdev.io/viewType.html?buildTypeId=MinecraftDev_Nightly_20253"><img src="https://ci.mcdev.io/app/rest/builds/buildType:(id:MinecraftDev_Nightly_20253)/statusIcon.svg" alt="2025.3 Nightly Status" /></a></td>
-    </tr>
-    <tr>
-        <td align="left">2026.1</td>
-        <td align="left"><a href="https://ci.mcdev.io/viewType.html?buildTypeId=MinecraftDev_Nightly_20261"><img src="https://ci.mcdev.io/app/rest/builds/buildType:(id:MinecraftDev_Nightly_20261)/statusIcon.svg" alt="2026.1 Nightly Status" /></a></td>
-    </tr>
-    <tr>
-        <td align="left">2026.2</td>
-        <td align="left"><a href="https://ci.mcdev.io/viewType.html?buildTypeId=MinecraftDev_Nightly_20262"><img src="https://ci.mcdev.io/app/rest/builds/buildType:(id:MinecraftDev_Nightly_20262)/statusIcon.svg" alt="2026.2 Nightly Status" /></a></td>
-    </tr>
-    <tr>
-        <td align="left"><b>OS Tests</b></td>
+        <td align="right"><b>OS Tests</b></td>
         <td align="left" colspan="2">
             <a href="https://github.com/minecraft-dev/MinecraftDev/actions?query=workflow%3A%22Test%22"><img src="https://github.com/minecraft-dev/MinecraftDev/workflows/Test/badge.svg?branch=dev&event=push" alt="GitHub Action Status" /></a>
          </td>
     </tr>
 </table>
 
-Info and Documentation [![Current Release](https://img.shields.io/badge/release-1.8.17-orange.svg?style=flat-square)](https://plugins.jetbrains.com/plugin/8327)
+Info and Documentation [![Current Release](https://img.shields.io/badge/release-1.8.11-orange.svg?style=flat-square)](https://plugins.jetbrains.com/plugin/8327)
 ----------------------
 
 <a href="https://discord.gg/j6UNcfr"><img src="https://i.imgur.com/JXu9C1G.png" height="48px"></img></a>
 
-Visit [https://mcdev.io](https://mcdev.io) for some information about the project.
+Visit [https://minecraftdev.org](https://minecraftdev.org) for some information about the project.
 
 
-Installation
-------------
+### Installation instructions for the official project:
 
 This plugin is available on the [JetBrains IntelliJ plugin repository](https://plugins.jetbrains.com/plugin/8327).
 
@@ -55,10 +67,10 @@ box, simply search for `Minecraft`. You can install it from there and restart In
 Dependencies
 ------------
 
-Gradle will download all necessary dependencies to build the project, but you do need JDK 25 installed and available to
+Gradle will download all necessary dependencies to build the project, but you do need JDK 21 installed and available to
 Gradle in order to build.
 
-You can easily install JDK 25 from [Adoptium](https://adoptium.net/temurin/releases). 
+You can easily install JDK 21 from [Adoptium](https://adoptium.net/temurin/releases). 
 
 Building
 --------
@@ -105,6 +117,18 @@ IDE with `ktlint` style settings and to automatically format this project's code
 ```
 ./gradlew ktlintApplyToIdea addKtlintFormatGitPreCommitHook
 ```
+
+IntelliJ includes a lot of dependencies transitively, including common dependencies that are used a lot, such as Kotlin,
+Commons Lang3, Guava, etc. Unfortunately, the source distribution for IntelliJ does not contain sources for libraries as
+well, so these libraries are imported into the IDE without sources by default. If you want to attach sources for (most)
+of the dependencies IntelliJ includes, run the `resolveIntellijLibSources` task and refresh the Gradle project in
+IntelliJ:
+
+```
+./gradlew resolveIntellijLibSources
+```
+
+If you're curious about that task, it is implemented in `buildSrc`.
 
 License
 -------
